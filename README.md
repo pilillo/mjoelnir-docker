@@ -7,3 +7,8 @@ Build the Dockerfile with:
 
 Start the Docker container with:
 ```docker run -d -p 80:80 mjoelnir```
+
+Mjölnir is now reachable from your host at: http://localhost/advisor/
+
+Mind that a further configuration of connection settings might still be necessary.
+Please consult the file /advisor/core/userSettings.php for further details.

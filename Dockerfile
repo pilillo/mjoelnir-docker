@@ -8,14 +8,12 @@ RUN apt-get clean all
 
 RUN wget http://downloads.sourceforge.net/project/mjoelnir/Mjoelnir_0-3-1.zip && \
     unzip Mjoelnir_0-3-1.zip && \
-    cp -R ./mjoelnir /var/www/html
+    rm Mjoelnir_0-3-1.zip && \
+    cp -R ./mjoelnir/advisor /var/www/html
 
 # on mysql the password is given with -p without spaces
-#RUN (/usr/bin/mysqld_safe &); sleep 5; mysqladmin -u root -proot create mjoelnir 
-RUN (service mysql start); sleep 5;
-
-RUN mysql -u root -p -e "create database advisor"
-RUN mysql -u root -p advisor < /var/www/html/mjoelnir/mjoelnir.sql
+RUN (/usr/bin/mysqld_safe &); sleep 5; 
+#RUN mysqladmin create mjoelnir; mysqlimport advisor /mjoelnir/mjoelnir.sql;
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
